@@ -1,1 +1,29 @@
- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wi-Fi Phone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="phone">
+    <h1>📱 Wi-Fi Phone</h1>
+
+    <input id="username" placeholder="Your username">
+
+    <input id="message" placeholder="Type a message...">
+
+    <button onclick="sendMessage()">Send 💬</button>
+
+    <button onclick="startCall()">Call 📞</button>
+
+    <div id="messages"></div>
+
+    <p id="status">Ready</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
