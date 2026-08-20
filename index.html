@@ -1,73 +1,36 @@
-const messages = document.getElementById("messages");
-const status = document.getElementById("status");
-const usernameDisplay = document.getElementById("usernameDisplay");
-const peopleOnline = document.getElementById("peopleOnline");
-const onlineCount = document.getElementById("onlineCount");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wi-Fi Phone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-// Make a random username
-function makeUsername() {
-    const names = [
-        "BluePanda",
-        "CoolTiger",
-        "FastFox",
-        "HappyKoala",
-        "RocketDog",
-        "PixelCat",
-        "StarWolf",
-        "SuperDuck",
-        "MagicBear",
-        "TurboLion"
-    ];
+<body>
+  <div class="phone">
+    <h1>📱 Wi-Fi Phone</h1>
 
-    const number = Math.floor(Math.random() * 9999) + 1;
-    const name = names[Math.floor(Math.random() * names.length)];
+    <div class="online-box">
+      🟢 <span id="onlineCount">1</span> people online
+    </div>
 
-    return name + number;
-}
+    <h3>Your username</h3>
+    <div id="usernameDisplay"></div>
 
-// Give this device a username
-let username = localStorage.getItem("wifiPhoneUsername");
+    <input id="message" placeholder="Type a message...">
 
-if (!username) {
-    username = makeUsername();
-    localStorage.setItem("wifiPhoneUsername", username);
-}
+    <button onclick="sendMessage()">Send 💬</button>
+    <button onclick="startCall()">Call 📞</button>
 
-usernameDisplay.textContent = username;
+    <h3>People Online</h3>
+    <div id="peopleOnline"></div>
 
-// Send a message
-function sendMessage() {
-    const message = document.getElementById("message").value.trim();
+    <div id="messages"></div>
 
-    if (!message) {
-        status.textContent = "Type a message first!";
-        return;
-    }
+    <p id="status">Connected</p>
+  </div>
 
-    const newMessage = document.createElement("div");
-
-    newMessage.className = "message";
-    newMessage.textContent = username + ": " + message;
-
-    messages.appendChild(newMessage);
-
-    document.getElementById("message").value = "";
-
-    status.textContent = "Message sent!";
-}
-
-// Call button
-function startCall() {
-    status.textContent = "📞 Calling...";
-
-    setTimeout(() => {
-        status.textContent = "Calling will be connected with WebRTC later.";
-    }, 1500);
-}
-
-// Temporary online display
-peopleOnline.innerHTML = `
-    <div class="person">🟢 ${username} <small>(You)</small></div>
-`;
-
-onlineCount.textContent = "1";
+  <script src="script.js"></script>
+</body>
+</html>
