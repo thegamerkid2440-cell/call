@@ -1,12 +1,46 @@
 const messages = document.getElementById("messages");
 const status = document.getElementById("status");
+const usernameDisplay = document.getElementById("usernameDisplay");
+const peopleOnline = document.getElementById("peopleOnline");
+const onlineCount = document.getElementById("onlineCount");
 
+// Make a random username
+function makeUsername() {
+    const names = [
+        "BluePanda",
+        "CoolTiger",
+        "FastFox",
+        "HappyKoala",
+        "RocketDog",
+        "PixelCat",
+        "StarWolf",
+        "SuperDuck",
+        "MagicBear",
+        "TurboLion"
+    ];
+
+    const number = Math.floor(Math.random() * 9999) + 1;
+    const name = names[Math.floor(Math.random() * names.length)];
+
+    return name + number;
+}
+
+// Give this device a username
+let username = localStorage.getItem("wifiPhoneUsername");
+
+if (!username) {
+    username = makeUsername();
+    localStorage.setItem("wifiPhoneUsername", username);
+}
+
+usernameDisplay.textContent = username;
+
+// Send a message
 function sendMessage() {
-    const username = document.getElementById("username").value.trim();
     const message = document.getElementById("message").value.trim();
 
-    if (!username || !message) {
-        status.textContent = "Enter your username and a message!";
+    if (!message) {
+        status.textContent = "Type a message first!";
         return;
     }
 
@@ -19,14 +53,21 @@ function sendMessage() {
 
     document.getElementById("message").value = "";
 
-    status.textContent = "Message added!";
+    status.textContent = "Message sent!";
 }
 
+// Call button
 function startCall() {
     status.textContent = "📞 Calling...";
 
-    // Real Wi-Fi calling will be added here with WebRTC.
     setTimeout(() => {
-        status.textContent = "WebRTC calling isn't connected yet.";
+        status.textContent = "Calling will be connected with WebRTC later.";
     }, 1500);
 }
+
+// Temporary online display
+peopleOnline.innerHTML = `
+    <div class="person">🟢 ${username} <small>(You)</small></div>
+`;
+
+onlineCount.textContent = "1";
